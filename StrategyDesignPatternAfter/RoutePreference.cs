@@ -1,10 +1,4 @@
-﻿
-
-
-
-
-
-public enum RoutePreference
+﻿public enum RoutePreference
 {
     Walking = 1,
     Cycling,

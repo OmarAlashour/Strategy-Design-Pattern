@@ -7,7 +7,7 @@
     if (Enum.TryParse(Console.ReadLine(), out RoutePreference routePreference) &&
         Enum.IsDefined(typeof(RoutePreference), routePreference))
     {
-        Route route = null;
+        Route route = null!;
         switch (routePreference)
         {
             case RoutePreference.Walking:
@@ -175,14 +175,14 @@ static void FindFastestRoute()
 
 public class Route
 {
-    public string Title { get; set; }
-    public string Origin { get; set; }
-    public string Destination { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Origin { get; set; } = string.Empty;
+    public string Destination { get; set; } = string.Empty;
     public TimeSpan Duration { get; set; }
     public int DistanceInKM { get; set; }
 
     public RoutePreference RoutePreference { get; set; }
-    public List<string> Directions { get; set; }
+    public List<string>? Directions { get; set; } 
 
     public override string ToString()
     {
@@ -192,12 +192,15 @@ public class Route
         var result = $"'{RoutePreference}' route [{Origin} → {Destination}]";
 
         result = $"{Title}\t [{formattedDuration}] ({formattedDistance})\n";
-        foreach (var direction in Directions)
+        if (Directions != null)
+        {
+            foreach (var direction in Directions)
         {
             result += $"   ├ {direction}\n";
+            }
         }
-
         return result;
+
     }
 }
 
